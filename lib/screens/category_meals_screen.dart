@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_proj3/widgets/category_meal_item.dart';
-import 'package:flutter_proj3/dummy_data.dart';
+import '../widgets/category_meal_item.dart';
+import '../dummy_data.dart';
 
 class CategoryMealsScreen extends StatelessWidget {
   // final String categoryId;
@@ -24,6 +24,7 @@ class CategoryMealsScreen extends StatelessWidget {
         itemBuilder: (ctx, index) {
           var categoryMealsItem = categoryMeals[index];
           return CategoryMealItem(
+              id: categoryMealsItem.id,
               title: categoryMealsItem.title,
               imageURL: categoryMealsItem.imageUrl,
               duration: categoryMealsItem.duration,
