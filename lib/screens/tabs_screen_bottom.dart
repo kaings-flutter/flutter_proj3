@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_proj3/screens/categories_screen.dart';
-import 'package:flutter_proj3/screens/favorites_screen.dart';
+import '../screens/categories_screen.dart';
+import '../screens/favorites_screen.dart';
+import '../widgets/main_drawer.dart';
 
 class TabsScreenBottom extends StatefulWidget {
   _TabsScreenBottomState createState() => _TabsScreenBottomState();
@@ -26,6 +27,7 @@ class _TabsScreenBottomState extends State<TabsScreenBottom> {
       appBar: AppBar(
         title: Text(_pages[_selectedPageIndex]['title']),
       ),
+      drawer: MainDrawer(),
       body: _pages[_selectedPageIndex]['page'],
       bottomNavigationBar: BottomNavigationBar(
         items: [
