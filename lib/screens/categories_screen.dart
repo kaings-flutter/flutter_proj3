@@ -5,20 +5,16 @@ import '../dummy_data.dart';
 class CategoriesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Deli Meal'),
-      ),
-      body: GridView(
-          padding: const EdgeInsets.all(15),
-          children: DUMMY_CATEGORIES
-              .map((cat) => CategoryItem(cat.id, cat.title, cat.color))
-              .toList(),
-          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 200,
-              childAspectRatio: 3 / 2,
-              crossAxisSpacing: 20,
-              mainAxisSpacing: 20)),
-    );
+    // remove Scaffold here to avoid double AppBar in TabBar
+    return GridView(
+        padding: const EdgeInsets.all(15),
+        children: DUMMY_CATEGORIES
+            .map((cat) => CategoryItem(cat.id, cat.title, cat.color))
+            .toList(),
+        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent: 200,
+            childAspectRatio: 3 / 2,
+            crossAxisSpacing: 20,
+            mainAxisSpacing: 20));
   }
 }
