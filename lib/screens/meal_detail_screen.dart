@@ -63,11 +63,20 @@ class MealDetailScreen extends StatelessWidget {
               buildSectionTitle('Steps', context),
               buildContainer(
                 ListView.builder(
-                  itemBuilder: (ctx, index) => ListTile(
-                    leading: CircleAvatar(
-                      child: Text('# ${(index + 1)}'),
-                    ),
-                    title: Text(selectedMeal.steps[index]),
+                  itemBuilder: (ctx, index) => Column(
+                    children: [
+                      ListTile(
+                        leading: CircleAvatar(
+                          child: Text('# ${(index + 1)}'),
+                        ),
+                        title: Text(
+                          selectedMeal.steps[index],
+                          style: TextStyle(
+                              fontWeight: FontWeight.normal, fontSize: 15),
+                        ),
+                      ),
+                      Divider()
+                    ],
                   ),
                   itemCount: selectedMeal.steps.length,
                 ),
