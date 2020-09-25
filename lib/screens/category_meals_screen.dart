@@ -13,6 +13,7 @@ class CategoryMealsScreen extends StatefulWidget {
 class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
   List<Meal> displayedMeals;
   Map<String, String> routeArgs;
+  bool _mealLoaded = false;
 
   // we could not place ModalRoute in initState because context is not ready
   @override
@@ -24,11 +25,18 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
   // at this life-cycle hook, context is available
   @override
   void didChangeDependencies() {
-    routeArgs =
-        ModalRoute.of(context).settings.arguments as Map<String, String>;
-    displayedMeals = DUMMY_MEALS.where((meal) {
-      return meal.categories.contains(routeArgs['id']);
-    }).toList();
+    // you need to do checking like this because
+    // didChangeDependencies triggers everytime there is state changes (e.g.: when you remove meal)
+    if (!_mealLoaded) {
+      routeArgs =
+          ModalRoute.of(context).settings.arguments as Map<String, String>;
+      displayedMeals = DUMMY_MEALS.where((meal) {
+        return meal.categories.contains(routeArgs['id']);
+      }).toList();
+
+      _mealLoaded = true;
+    }
+
     super.didChangeDependencies();
   }
 

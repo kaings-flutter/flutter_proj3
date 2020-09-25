@@ -58,7 +58,7 @@ class CategoryMealItem extends StatelessWidget {
         .then((valuePassedFrmPreviousPage) {
       // if Delete Icon is pressed, it will passed the itemId. But, if back button is pressed, the value will be null
       print('value frm MealDetailScreen..... $valuePassedFrmPreviousPage');
-      if (valuePassedFrmPreviousPage) {
+      if (valuePassedFrmPreviousPage != null) {
         print(
             'value frm MealDetailScreen NOT NULL..... $valuePassedFrmPreviousPage');
         removeItem(valuePassedFrmPreviousPage);
