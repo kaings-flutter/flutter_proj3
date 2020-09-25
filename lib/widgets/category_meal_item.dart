@@ -51,7 +51,12 @@ class CategoryMealItem extends StatelessWidget {
   }
 
   void selectMeal(BuildContext ctx) {
-    Navigator.of(ctx).pushNamed(MealDetailScreen.routeName, arguments: id);
+    Navigator.of(ctx).pushNamed(MealDetailScreen.routeName, arguments: id)
+        // return of `pushnamed` is `Future`. The then value will be triggered after the next page after this page is `pop`
+        .then((valuePassedFrmPreviousPage) {
+      // if Delete Icon is pressed, it will passed the itemId. But, if back button is pressed, the value will be null
+      print('value frm MealDetailScreen..... $valuePassedFrmPreviousPage');
+    });
   }
 
   @override
