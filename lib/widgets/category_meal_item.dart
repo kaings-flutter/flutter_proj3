@@ -9,6 +9,7 @@ class CategoryMealItem extends StatelessWidget {
   final int duration;
   final Complexity complexity;
   final Affordability affordability;
+  final Function removeItem;
 
   CategoryMealItem(
       {@required this.id,
@@ -16,7 +17,8 @@ class CategoryMealItem extends StatelessWidget {
       @required this.imageURL,
       @required this.duration,
       @required this.complexity,
-      @required this.affordability});
+      @required this.affordability,
+      @required this.removeItem});
 
   String get complexityText {
     switch (complexity) {
@@ -56,6 +58,11 @@ class CategoryMealItem extends StatelessWidget {
         .then((valuePassedFrmPreviousPage) {
       // if Delete Icon is pressed, it will passed the itemId. But, if back button is pressed, the value will be null
       print('value frm MealDetailScreen..... $valuePassedFrmPreviousPage');
+      if (valuePassedFrmPreviousPage) {
+        print(
+            'value frm MealDetailScreen NOT NULL..... $valuePassedFrmPreviousPage');
+        removeItem(valuePassedFrmPreviousPage);
+      }
     });
   }
 
