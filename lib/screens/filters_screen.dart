@@ -16,6 +16,16 @@ class _FiltersScreenState extends State<FiltersScreen> {
     '_lactoseFree': false
   };
 
+  Widget buildSwitchListTile(String _title, String _subtitle,
+      bool _currentValue, Function _updateValue) {
+    return SwitchListTile(
+      title: Text(_title),
+      subtitle: Text(_subtitle),
+      value: _currentValue,
+      onChanged: _updateValue,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,16 +46,36 @@ class _FiltersScreenState extends State<FiltersScreen> {
           Expanded(
             child: ListView(
               children: [
-                SwitchListTile(
-                  title: Text('Gluten-Free'),
-                  subtitle: Text('Only include gluten-free meals.'),
-                  value: filterOptions['_glutenFree'],
-                  onChanged: (newValue) {
-                    setState(() {
-                      filterOptions['_glutenFree'] = newValue;
-                    });
-                  },
-                )
+                buildSwitchListTile(
+                    'Gluten-Free',
+                    'Only include gluten-free meals.',
+                    filterOptions['_glutenFree'], (newValue) {
+                  setState(() {
+                    filterOptions['_glutenFree'] = newValue;
+                  });
+                }),
+                buildSwitchListTile(
+                    'Lactose-Free',
+                    'Only include lactose-free meals.',
+                    filterOptions['_lactoseFree'], (newValue) {
+                  setState(() {
+                    filterOptions['_lactoseFree'] = newValue;
+                  });
+                }),
+                buildSwitchListTile(
+                    'Vegetarian',
+                    'Only include vegetarian meals.',
+                    filterOptions['_vegetarian'], (newValue) {
+                  setState(() {
+                    filterOptions['_vegetarian'] = newValue;
+                  });
+                }),
+                buildSwitchListTile('Vegan', 'Only include vegan meals.',
+                    filterOptions['_vegan'], (newValue) {
+                  setState(() {
+                    filterOptions['_vegan'] = newValue;
+                  });
+                }),
               ],
             ),
           ),
