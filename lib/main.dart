@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import './models/meal.dart';
+import './dummy_data.dart';
 import './screens/filters_screen.dart';
 import './screens/tabs_screen_bottom.dart';
 import './screens/meal_detail_screen.dart';
@@ -7,7 +9,44 @@ import './screens/category_meals_screen.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  Map<String, bool> _currentFilterOptions = {
+    '_glutenFree': false,
+    '_vegetarian': false,
+    '_vegan': false,
+    '_lactoseFree': false
+  };
+
+  List<Meal> _availableMeals = DUMMY_MEALS;
+
+  void _setFilters(Map<String, bool> filterOptions) {
+    setState(() {
+      _currentFilterOptions = filterOptions;
+
+      _availableMeals = DUMMY_MEALS.where((meal) {
+        if (_currentFilterOptions['_glutenFree'] && !meal.isGlutenFree) {
+          return false;
+        }
+        if (_currentFilterOptions['_vegetarian'] && !meal.isVegetarian) {
+          return false;
+        }
+        if (_currentFilterOptions['_vegan'] && !meal.isVegan) {
+          return false;
+        }
+        if (_currentFilterOptions['_lactoseFree'] && !meal.isLactoseFree) {
+          return false;
+        }
+
+        return true;
+      }).toList();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -28,9 +67,10 @@ class MyApp extends StatelessWidget {
       initialRoute: '/', // default route
       routes: {
         '/': (ctx) => TabsScreenBottom(),
-        CategoryMealsScreen.routeName: (ctx) => CategoryMealsScreen(),
+        CategoryMealsScreen.routeName: (ctx) =>
+            CategoryMealsScreen(_availableMeals),
         MealDetailScreen.routeName: (ctx) => MealDetailScreen(),
-        FiltersScreen.routeName: (ctx) => FiltersScreen()
+        FiltersScreen.routeName: (ctx) => FiltersScreen(_setFilters),
       },
       // onGenerateRoute will be reached when the navigated route is not found in above routes
       // onGenerateRoute: (settings) {

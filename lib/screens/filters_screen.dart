@@ -4,6 +4,10 @@ import '../widgets/main_drawer.dart';
 class FiltersScreen extends StatefulWidget {
   static const routeName = '/filters';
 
+  final Function saveFilters;
+
+  FiltersScreen(this.saveFilters);
+
   @override
   _FiltersScreenState createState() => _FiltersScreenState();
 }
@@ -31,6 +35,14 @@ class _FiltersScreenState extends State<FiltersScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Filters Screen'),
+        actions: [
+          IconButton(
+              icon: Icon(Icons.save),
+              // `saveFilters` function are part of widget! Not State
+              onPressed: () {
+                widget.saveFilters(filterOptions);
+              }),
+        ],
       ),
       drawer: MainDrawer(),
       body: Column(
