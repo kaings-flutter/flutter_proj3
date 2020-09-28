@@ -70,7 +70,8 @@ class _MyAppState extends State<MyApp> {
         CategoryMealsScreen.routeName: (ctx) =>
             CategoryMealsScreen(_availableMeals),
         MealDetailScreen.routeName: (ctx) => MealDetailScreen(),
-        FiltersScreen.routeName: (ctx) => FiltersScreen(_setFilters),
+        FiltersScreen.routeName: (ctx) =>
+            FiltersScreen(_currentFilterOptions, _setFilters),
       },
       // onGenerateRoute will be reached when the navigated route is not found in above routes
       // onGenerateRoute: (settings) {
